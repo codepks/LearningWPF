@@ -30,7 +30,7 @@ The Content property only allows for a single child element, so we use a WrapPan
 </Button>
 ```
 
-## Events
+## Event Handling
 
 
 
