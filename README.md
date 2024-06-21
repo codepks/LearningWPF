@@ -115,7 +115,14 @@ The Content property only allows for a single child element, so we use a WrapPan
 ```
 this.TextController
 ```
-
+18. How to get the handle of the element from the listener function:
+```
+private void Checkbox_Checked(object sender, RoutedEventArgs e)
+{
+    this.LengthText.Text += ((CheckBox)sender).Content;
+}
+```
+here **sender** is the checkbox itself (parent)which needs to be typecasted to the checkbox before being used
 
 
 
