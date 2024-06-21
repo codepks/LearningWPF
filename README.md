@@ -103,7 +103,18 @@ The Content property only allows for a single child element, so we use a WrapPan
 </ComboBox>
 ```
 
-14. Events for Button is **Checked** and for Checkbox is **Checked**
+14. For adding controller to the element be it button or checkbox you need to mention the name of the checkbox using **xName=""**
+
+15. On Adding events like Click and Checked the source code will automatically add the listener function which the events will be recieved. You can adjust the name to make it customized as per your needs.
+
+16. **Events**
+    -  for Button is **Click** and
+    -  for Checkbox is **Checked**
+
+17. The xName given is a controlled and can be accessed via
+```
+this.TextController
+```
 
 
 
