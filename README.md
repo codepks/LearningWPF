@@ -95,6 +95,15 @@ The Content property only allows for a single child element, so we use a WrapPan
 12. In order to enter multiple elements in rows and columns (it cnabe visually identified) make a grid and add row and column definitions
     - In general start with Grid.ColumnDefinitions and within column one can add stack of items
 
+13. For combo box and selecting the default one:
+```
+<ComboBox Padding="2" SelectedIndex="0" Margin="0 0 0 10" >
+    <ComboBoxItem>Rubber</ComboBoxItem>
+    <ComboBoxItem>Not Rubber</ComboBoxItem>
+</ComboBox>
+```
+
+14. Events for Button is **Checked** and for Checkbox is **Checked**
 
 
 
