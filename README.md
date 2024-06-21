@@ -52,9 +52,47 @@ The Content property only allows for a single child element, so we use a WrapPan
 </Grid>
 ```
 5. In the above requirement, we need two degrees of stackPanel one for the outer for stacking up groups and one for the elements
-![image](https://github.com/codepks/LearningWPF/assets/17923311/675d8c8e-bff9-48c3-bd71-d1bff6d71a8c)
 
-6. 
+![image](https://github.com/codepks/LearningWPF/assets/17923311/6fd42592-989e-405d-9091-23896dd013fb)
+
+6. But 2nd degree of stacking would not equally divide our grid, so we can achieve this using **Grid** and **ColumnDefinitions**
+- First make the column definition
+- put buttons inside the column definition 
+```
+<StackPanel>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="0" Content="Apply"/>
+        <Button Grid.Column="1" Content="Reset"/>
+        <Button Grid.Column="2" Content="Refresh"/>
+    </Grid>
+</StackPanel>
+```
+**"*"** denotes the equal ration thing when diving the column width wise
+
+7. Overall Padding : To put a good padding around whole code we can use **<Border Padding = " ">**
+```
+<Border Padding="10">
+<StackPanel>
+    <Grid >
+```
+
+8. To put padding around the buttons, we can use **Margin** inside the buttons
+```
+<Button Margin="10 0 10 0" Grid.Column="0" Content="Apply"/>
+```
+9. Note : Padding goes inside whereas margin goes outside.
+
+10. To increase the size of textbox we can use padding instead of margin(which will reduce its size)
+
+11. In this example we mostly decide between StackPanel or Grid. If there is more than one element in row then it would be Grid else STackPAnel in case of StackPanel.
+
+12. 
 
 
 
