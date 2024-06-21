@@ -92,7 +92,8 @@ The Content property only allows for a single child element, so we use a WrapPan
 
 11. In this example we mostly decide between StackPanel or Grid. If there is more than one element in row then it would be Grid else STackPAnel in case of StackPanel.
 
-12. 
+12. In order to enter multiple elements in rows and columns (it cnabe visually identified) make a grid and add row and column definitions
+    - In general start with Grid.ColumnDefinitions and within column one can add stack of items
 
 
 
