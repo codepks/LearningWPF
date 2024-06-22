@@ -103,15 +103,31 @@ The Content property only allows for a single child element, so we use a WrapPan
 </ComboBox>
 ```
 
-14. For adding controller to the element be it button or checkbox you need to mention the name of the checkbox using **xName=""**
+14. For adding controller to the element be it button or checkbox you need to have its listener in the source code and a controller which you mention with the name of the checkbox using **x:Name=""**
 
-15. On Adding events like Click and Checked the source code will automatically add the listener function which the events will be recieved. You can adjust the name to make it customized as per your needs.
+15. On Adding events like **Click** and **Checked** the source code will automatically add the listener function in source code through which the events will be recieved. You can adjust the name to make it customized as per your needs.
+
+In the code below we are trying to display some text on the Desciption box on click of apply button
+_xaml code_
+```
+ <TextBox x:Name="DescriptionTextBox" Padding="2"/>
+
+ <Button x:Name="ApplyButton" Click="ApplyButton_Click" Margin="0 0 10 0" Grid.Column="0" Content="Apply" />
+```
+_added source code_
+```
+ private void Apply_Button_Click(object sender, RoutedEventArgs e)
+ {
+     this.DescriptionTextBox.Text = "Apply Button Clicked";
+ }
+```
+
 
 16. **Events**
     -  for Button is **Click** and
     -  for Checkbox is **Checked**
 
-17. The xName given is a controlled and can be accessed via
+17. The **xName** given is a controlled and can be accessed via
 ```
 this.TextController
 ```
@@ -122,7 +138,7 @@ private void Checkbox_Checked(object sender, RoutedEventArgs e)
     this.LengthText.Text += ((CheckBox)sender).Content;
 }
 ```
-here **sender** is the checkbox itself (parent)which needs to be typecasted to the checkbox before being used
+here **sender** is the checkbox itself (parent)which needs to be typecasted to the checkbox before being used as the type Checkbox
 
 
 
