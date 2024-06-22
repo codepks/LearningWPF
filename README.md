@@ -30,8 +30,10 @@ The Content property only allows for a single child element, so we use a WrapPan
 </Button>
 ```
 
-# WPF Tutorial - Chapter 1
+# WPF Tutorial - Chapter 1 - Static UI and Event Handling
 ![image](https://github.com/codepks/LearningWPF/assets/17923311/4e708224-ac44-4500-9b73-433519d3e12d)
+
+[source](https://www.youtube.com/watch?v=Vjldip84CXQ&list=PLrW43fNmjaQVYF4zgsD0oL9Iv6u23PI6M&index=1&ab_channel=AngelSix)
 
 1. Create **WPF Application** from the Visual Studio
 2. We will start by putting the elements in **stackPanel** to stack the elements one after the another
@@ -181,6 +183,7 @@ Note:
 21. MessageBox.Show("<string>") shows a dialog box and can be used for debugging too.
 
 
+# WPF Tutorial - Chapter 2 - MVVM
 
 
 
