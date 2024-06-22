@@ -185,6 +185,137 @@ Note:
 
 # WPF Tutorial - Chapter 2 - MVVM
 
+[source](https://www.codeproject.com/Articles/819294/WPF-MVVM-step-by-step-Basics-to-Advance-Level)
+
+## Introduction 
+We follow basic 3 layer architecture
+1. User Interface
+2. Business Logic
+3. Data Access Layer
+
+## Mapping Code and Transformation Code
+
+### Noob Code
+```
+lblName.Content = o.CustomerName; // mapping code
+lblAmount.Content = o.Amount; // mapping code
+
+if (o.Amount > 2000) // transformation code
+{
+    lblBuyingHabits.Background = new SolidColorBrush(Colors.Blue);
+}
+else if (o.Amount > 1500) // transformation code
+{
+    lblBuyingHabits.Background = new SolidColorBrush(Colors.Red);
+}
+
+if (obj.Married == "Married") // transformation code
+{
+    chkMarried.IsChecked = true;
+}
+else
+{
+    chkMarried.IsChecked = false;
+}
+```
+A normal deveoper puts both of these in code behind of XAML.cs which is basicaly a UI layer.
+
+### Problems
+This may create problem in switching this code to a different technologies. For example MVC, Web or Mobile techs. <br>
+
+The current code that we have written in XAML.cs is inheriting from WPF specific class MainWindow which is at UI layer <br>
+Switching to other techs may need this to be removed. <br>
+
+
+###
+We can use class libraries which can have all the UI properties in a class and it can be used as a reference in some WPF projecct. <br>
+
+## MVVM
+We will separate the transformation logic to a class library which containts the UI properties and use this in mapping in the code behing
+<br>
+Class Library where all the properties are defined and can be re-used in other technologies too. <br>
+Below is our **ViewModel** class as CustomerViewModel <br>
+Customer would be out Model class
+```
+public class CustomerViewModel 
+    {
+        private Customer obj = new Customer();
+
+        public string TxtCustomerName
+        {
+            get { return obj.CustomerName; }
+            set { obj.CustomerName = value; }
+        }        
+
+        public string TxtAmount
+        {
+            get { return Convert.ToString(obj.Amount) ; }
+            set { obj.Amount = Convert.ToDouble(value); }
+        }
+
+
+        public string LblAmountColor
+        {
+            get 
+            {
+                if (obj.Amount > 2000)
+                {
+                    return "Blue";
+                }
+                else if (obj.Amount > 1500)
+                {
+                    return "Red";
+                }
+                return "Yellow";
+            }
+        }
+
+        public bool IsMarried
+        {
+            get
+            {
+                if (obj.Married == "Married")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+        }}
+```
+
+Mapping logic in Code Behind
+```
+private void DisplayUi(CustomerViewModel o)
+{
+lblName.Content = o.TxtCustomerName;
+lblAmount.Content = o.TxtAmount;
+BrushConverter brushconv = new BrushConverter();
+lblBuyingHabits.Background = brushconv.ConvertFromString(o.LblAmountColor) as SolidColorBrush;
+chkMarried.IsChecked = o.IsMarried;
+}
+```
+
+## Zeroing the code behind
+We can make the code behind to zero by doing things in XAML file instead and the taking car eo the binding too
+
+![image](https://github.com/codepks/LearningWPF/assets/17923311/f2e9fc22-7801-4f3b-a247-21f95a863a87)
+
+If you see the behind code of your XAML.CS it has no GLUE code, neither transformation or mapping nature code. The only code which is present is the standard WPF code which initializes the main WPF UI.
+
+```
+public partial class MVVMWithBindings : Window
+{
+        public MVVMWithBindings()
+        {InitializeComponent();}
+}
+```
+
+## Adding actions and “INotifyPropertyChanged” interface
+**"_ViewModel is a wrapper around the Model class._"**
 
 
 
