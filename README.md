@@ -140,8 +140,40 @@ private void Checkbox_Checked(object sender, RoutedEventArgs e)
 ```
 here **sender** is the checkbox itself (parent)which needs to be typecasted to the checkbox before being used as the type Checkbox
 
+Note: + operator is necessary here because you _add to_ what is already in there instead of overwriting it.
 
+19. Similary for retrieving item from Dropdown and displaying it on a TextBlock
+selectionChanged is the _event handler_ here
+```
+<ComboBox SelectionChanged="ComboBox_SelectionChanged_Purchase"  Padding="2" SelectedIndex="0" Margin="0 0 0 10" >
+    <ComboBoxItem>Rubber</ComboBoxItem>
+    <ComboBoxItem>Not Rubber</ComboBoxItem>
+</ComboBox>
 
+<TextBlock Text="Supplier Name"/>
+<TextBox x:Name="PurchaseNote" Margin="0 0 0 10"/>
+```
+
+```
+private void ComboBox_SelectionChanged_Purchase(object sender, SelectionChangedEventArgs e)
+{
+    if (PurchaseNote == null)
+        return;
+
+    var combo = (ComboBox)sender;
+    var selectedValue = (ComboBoxItem)combo.SelectedValue;
+
+    this.PurchaseNote.Text += (string)selectedValue.Content;
+}
+```
+Note:
+- We check for null as on UI load the combobox is null, so to avoid crash we check for null.
+- The sequestion is :
+    a. Get the combo
+    b. Get the selected value as ComboItem from the combo
+    c. Get the content from the ComboItem and cast it to a string
+
+20. 
 
 
 
