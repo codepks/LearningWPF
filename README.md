@@ -30,7 +30,7 @@ The Content property only allows for a single child element, so we use a WrapPan
 </Button>
 ```
 
-# WPF Tutorial
+# WPF Tutorial - Chapter 1
 ![image](https://github.com/codepks/LearningWPF/assets/17923311/4e708224-ac44-4500-9b73-433519d3e12d)
 
 1. Create **WPF Application** from the Visual Studio
@@ -173,9 +173,12 @@ Note:
     b. Get the selected value as ComboItem from the combo
     c. Get the content from the ComboItem and cast it to a string
 
-20. 
+20. Task : To display on the text/checkbox/combobox on UI load or startup
+    - Either one can go writing the startup code in the constructor
+    - Or **override** **Loaded** function which gets called on UI load
+    - You can call any of the even handler methos in this Loaded overriden method to load a content on startup of UI
 
-
+21. MessageBox.Show("<string>") shows a dialog box and can be used for debugging too.
 
 
 
