@@ -197,7 +197,7 @@ We follow basic 3 layer architecture
 
 ### Noob Code
 ```
-lblName.Content = o.CustomerName; // mapping code
+lblName.Content = o.CustomerName; // mapping code or binding logic
 lblAmount.Content = o.Amount; // mapping code
 
 if (o.Amount > 2000) // transformation code
@@ -218,7 +218,10 @@ else
     chkMarried.IsChecked = false;
 }
 ```
-A normal deveoper puts both of these in code behind of XAML.cs which is basicaly a UI layer.
+A normal deveoper puts both of these in code behind of XAML.cs which is basicaly a UI layer. <br>
+
+### Responsibilities of UI layer
+The reponsibility of UI layer is to only control the look and feel of UI layer and not the logic of the code.
 
 ### Problems
 This may create problem in switching this code to a different technologies. For example MVC, Web or Mobile techs. <br>
@@ -227,15 +230,18 @@ The current code that we have written in XAML.cs is inheriting from WPF specific
 Switching to other techs may need this to be removed. <br>
 
 
-###
+### class libraries
 We can use class libraries which can have all the UI properties in a class and it can be used as a reference in some WPF projecct. <br>
 
 ## MVVM
 We will separate the transformation logic to a class library which containts the UI properties and use this in mapping in the code behing
 <br>
 Class Library where all the properties are defined and can be re-used in other technologies too. <br>
-Below is our **ViewModel** class as CustomerViewModel <br>
-Customer would be out Model class
+1. Below is our **ViewModel** class as CustomerViewModel
+2. Customer would be our Model class
+3. CustomerViewModel would be having the Properties listed in it which wil be exposing the data members of the model class `obj.CustomerName` for e.g.
+4. It will have mapping as well as the transformational code.
+
 ```
 public class CustomerViewModel 
     {
@@ -299,6 +305,14 @@ chkMarried.IsChecked = o.IsMarried;
 }
 ```
 
+This is what our project should look like :
+![image](https://github.com/codepks/LearningWPF/assets/17923311/e40256d4-061a-4804-9cfd-5a9f7ab4a7f7)
+
+In the architecture abve, this is how you are going to add reference:
+1. Add reference of ViewModel in View layer
+2. Add reference of Model n ViewModel layer
+3. View shouldn't have reference to the model direcctly
+
 ## Zeroing the code behind
 We can make the code behind to zero by doing things in XAML file instead and the taking car eo the binding too
 
@@ -314,7 +328,7 @@ public partial class MVVMWithBindings : Window
 }
 ```
 
-## Adding actions and “INotifyPropertyChanged” interface
+## Adding actions and notifications
 
 **"_ViewModel is a wrapper around the Model class._"**
 
@@ -341,5 +355,109 @@ How we invoke the Calculate method from the XAML to the ViewModel class? two way
 
 Here we need to send commands.
 
+### Commands
+Let's make a ButtonCommand here which inherits from inherits from ICommand
+```
+public class ButtonCommand : ICommand
+{
+        public bool CanExecute(object parameter)
+        {
+      // When to execute
+      // Validation logic goes here
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public void Execute(object parameter)
+        {
+// What to Execute
+      // Execution logic goes here
+    }
+}
+```
+
+1. This command interface forces to implments 2 functions, `CanExecute` and `Execute` which takes care of Validation and what to execute steps.
+2. In the `CanExecute` we can call the validation step put in our view model class or return `true` by default
+3. In the `Execute` step we can call the `Calculate` tax function
 
 
+_How to consume this command class now?_ <br>
+1. We will create a private command objecct in our ModelView class
+2. Invoke it using the ModelView class `this` pointer to give it the context
+3. Expose the private object via `ICommand` method to the XAML so that XAML get to call it
+4. So far above was the mapping step for Command for XAML 
+
+
+### Getting Notifications
+After sending the command we should notification of the command sent. For this
+1. We need to inherit our ModelViewClass from `INotifyPropertyChanged`
+2. In the `CalculateTax` function raise the event for property that is getting changed, for e.g. here it is `Tax`
+
+```
+public class CustomerViewModel : INotifyPropertyChanged // Point 1
+{
+….
+….
+        public void Calculate()
+        {
+            obj.CalculateTax();
+            if (PropertyChanged != null) // Point 2
+            {
+                PropertyChanged(this,new PropertyChangedEventArgs("Tax"));
+            // Point 3
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+}
+```
+
+## Making Commands Generic
+We can make the commands generic and independent of which ViewModel class calls it or gets trigerred in it.
+
+**BEFORE**
+```
+public class CustomerViewModel 
+{
+    private ButtonCommand objCommand; //  Point 1
+    public CustomerViewModel()
+    {
+        objCommand = new ButtonCommand(this); // Point 2
+    }
+}
+```
+
+**AFTER**
+```
+public class CustomerViewModel : INotifyPropertyChanged
+{
+    private Customer obj = new Customer();
+    private ButtonCommandobjCommand;
+    public CustomerViewModel()
+    {
+        objCommand = new ButtonCommand(obj.CalculateTax,  obj.IsValid);
+    }
+}
+```
+
+We will using generic delegates `Action` and `Func` in our Command class
+```
+public class ButtonCommand : ICommand
+{
+    private Action WhattoExecute;
+    private Func<bool> WhentoExecute;
+    public ButtonCommand(Action What , Func<bool> When) // Point 1
+    {
+        WhattoExecute = What;
+        WhentoExecute = When;
+    }
+    public bool CanExecute(object parameter)
+    {
+        return WhentoExecute(); // Point 2
+    }
+    public void Execute(object parameter)
+    {
+        WhattoExecute(); // Point 3
+    }
+}
+```
