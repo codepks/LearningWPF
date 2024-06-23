@@ -315,8 +315,31 @@ public partial class MVVMWithBindings : Window
 ```
 
 ## Adding actions and “INotifyPropertyChanged” interface
+
 **"_ViewModel is a wrapper around the Model class._"**
 
+1. Suppose if we make Calculate Tax button in the UI, then the model class Customber will have its implmentation
+2. CustomerViewModel will take care of its invocation
+```
+public class CustomerViewModel 
+{
+        private Customer obj = new Customer();
+....
+....
+....
+....
+        public void Calculate()
+        {
+            obj.CalculateTax();
+        }
+}
+```
+
+How we invoke the Calculate method from the XAML to the ViewModel class? two ways to communicate
+1. We can interact from XAML to ViewModel using Properties using Bindings
+2. We can also send actions to ViewModel using commands
+
+Here we need to send commands.
 
 
 
