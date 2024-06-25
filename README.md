@@ -461,3 +461,10 @@ public class ButtonCommand : ICommand
     }
 }
 ```
+
+# Chapter 3 - Singleton Sean
+## View
+### MainWindow.xaml
+1. In `Grid.Resources` we define the DataTemplates
+2. The `DataTemplate` we specify datatype attribute where `ModelView` is associated with `View`
+3. For e.g. for the `MakeReservationViewModel`, the associated view is `MakeReservationView`.
