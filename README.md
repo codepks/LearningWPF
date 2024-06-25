@@ -468,3 +468,14 @@ public class ButtonCommand : ICommand
 1. In `Grid.Resources` we define the DataTemplates
 2. The `DataTemplate` we specify datatype attribute where `ModelView` is associated with `View`
 3. For e.g. for the `MakeReservationViewModel`, the associated view is `MakeReservationView`.
+
+### MainWindow.xaml.cs 
+1. It is mostly empty except for InitializeComponent. That is how it should be.
+2. We have mode the association and view switching available in `MainWindow.xaml`
+
+### App.xaml.cs
+Lots of services are used
+
+### App.xaml
+You can make global style changes here
+
