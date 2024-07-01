@@ -479,3 +479,4 @@ Lots of services are used
 ### App.xaml
 You can make global style changes here
 
+# Dependency Injection
