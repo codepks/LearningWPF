@@ -481,7 +481,63 @@ Lots of services are used
 2. view.cs is the code behind which should as per best practice have only InitializeCompoenent() function
 3. viewModel file is the one which which interacts wwith the model class and generally implements INotifyPropertyChanged and send events to UI on updates
 
-### App.xaml
-You can make global style changes here
+## INotifyPropertyChanged
+```
+public class CommonBase : INotifyPropertyChanged
+   {
+      public event PropertyChangedEventHandler PropertyChanged;
 
-# Dependency Injection
+      protected void RaisePropertyChanged(String propertyName)
+      {
+         PropertyChangedEventHandler handler = PropertyChanged;
+         if(handler != null)
+            handler(this, new PropertyChangedEventArgs(propertyName));
+      }
+   }
+```
+
+```
+public class CommonBase : INotifyPropertyChanged
+```
+INotifyPropertyChanged interface. This interface is a standard in .NET that provides a way to notify clients (like UI elements) that a property value has changed.
+
+```
+public event PropertyChangedEventHandler PropertyChanged;
+```
+1. This line declares an event named PropertyChanged. This event is of the type PropertyChangedEventHandler, which is a delegate that represents the method that will handle the PropertyChanged event.
+2. According to the INotifyPropertyChanged interface, when a property value changes, this event should be raised to notify any subscribers (typically UI elements) that they need to update themselves.
+
+```
+protected void RaisePropertyChanged(String propertyName)
+{
+   PropertyChangedEventHandler handler = PropertyChanged;
+   if(handler != null)
+      handler(this, new PropertyChangedEventArgs(propertyName));
+}
+```
+1. It takes a string parameter, propertyName, which specifies the name of the property that has changed.
+2. It assigns the PropertyChanged event to a local variable handler. This is **done to prevent the event from being null during invocation** if it gets unsubscribed just before the event is raised.
+3.  **The if statement** checks if handler is not null, which means there are subscribers to the event. If there are, it invokes the handler passing this (the current instance of the class) and a new instance of PropertyChangedEventArgs, initialized with the propertyName that has changed.
+
+
+Usage
+```
+public class MyViewModel : CommonBase
+{
+   private string myProperty;
+
+   public string MyProperty
+   {
+      get { return myProperty; }
+      set
+      {
+         if (myProperty != value)
+         {
+            myProperty = value;
+            RaisePropertyChanged(nameof(MyProperty)); // Notify change
+         }
+      }
+   }
+}
+```
+
