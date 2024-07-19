@@ -476,6 +476,11 @@ public class ButtonCommand : ICommand
 ### App.xaml.cs
 Lots of services are used
 
+# My Sample
+1. view.xaml is where you design the code
+2. view.cs is the code behind which should as per best practice have only InitializeCompoenent() function
+3. viewModel file is the one which which interacts wwith the model class and generally implements INotifyPropertyChanged and send events to UI on updates
+
 ### App.xaml
 You can make global style changes here
 
