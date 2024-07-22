@@ -541,3 +541,6 @@ public class MyViewModel : CommonBase
 }
 ```
 
+# Loaded vs OnInitialized 
+1. Loaded - The Loaded event is triggered after the element is loaded, which means it is fully initialized and ready to be interacted with
+2. OnInitialized method, which is called during the initialization phase, before the element is added to the visual tree. It is apparently called before Loaded
