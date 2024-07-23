@@ -1,6 +1,9 @@
 # Starting
 MainWindow.xaml is the xaml file to start with.
 
+1. In MVVM we try not to keep any logic in view (.xaml and .xaml.cs(code-behind))
+2. Instead we keep the logic in View Model and bind the View Model elements to the view
+
 # Basics
 ```
 <Button FontWeight="Bold" Content="A button" />
