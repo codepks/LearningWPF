@@ -551,3 +551,70 @@ public class MyViewModel : CommonBase
 - Only after clicking the UI and once user is able to see the UI the Loaded function is called
 2. OnInitialized method, which is called during the initialization phase, before the element is added to the visual tree. It is apparently called before Loaded
 
+# Attaching Button from XAML to ViewModel
+xaml file
+```
+<Button Content="Save to Database"  
+        HorizontalAlignment="Left"  
+        Height="30"  
+        Margin="68,843,0,0"  
+        VerticalAlignment="Top"  
+        Width="154"  
+        Command="{Binding SaveCommand}" />
+```
+ViewModelFile
+```
+using System;  
+using System.Windows.Input;  
+
+public class MyViewModel : BaseViewModel // BaseViewModel could implement INotifyPropertyChanged  
+{  
+    public MyViewModel()  
+    {  
+        SaveCommand = new RelayCommand(SaveToDatabase, CanSaveToDatabase);  
+    }  
+
+    public ICommand SaveCommand { get; private set; }  
+
+    private void SaveToDatabase()  
+    {  
+        // Logic to save to the database goes here  
+        Console.WriteLine("Save to database logic executed.");  
+    }  
+
+    private bool CanSaveToDatabase()  
+    {  
+        // Here you can add logic to determine if the command can execute  
+        return true; // or false based on actual conditions  
+    }  
+}  
+
+public class RelayCommand : ICommand  
+{  
+    private readonly Action _execute;  
+    private readonly Func<bool> _canExecute;  
+
+    public RelayCommand(Action execute, Func<bool> canExecute = null)  
+    {  
+        _execute = execute;  
+        _canExecute = canExecute;  
+    }  
+
+    public event EventHandler CanExecuteChanged;  
+
+    public bool CanExecute(object parameter)  
+    {  
+        return _canExecute == null || _canExecute();  
+    }  
+
+    public void Execute(object parameter)  
+    {  
+        _execute();  
+    }  
+
+    public void RaiseCanExecuteChanged()  
+    {  
+        CanExecuteChanged?.Invoke(this, EventArgs.Empty);  
+    }  
+}
+```
