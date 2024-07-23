@@ -546,7 +546,8 @@ public class MyViewModel : CommonBase
 
 # Loaded vs OnInitialized 
 1. Loaded - The Loaded event is triggered after the element is loaded, which means it is fully initialized and ready to be interacted with
-- In case of multiple view the dependent loaded is called after the primary loaded 
+- In case of multiple view the dependent loaded is called after the primary loaded
+- DLL loading can happen before the UI loading and until then UI loaded is not called
+- Only after clicking the UI and once user is able to see the UI the Loaded function is called
 2. OnInitialized method, which is called during the initialization phase, before the element is added to the visual tree. It is apparently called before Loaded
 
-In case of 
