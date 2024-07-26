@@ -739,7 +739,7 @@ UniformGrid arranges elements in a grid where all cells are of equal size. It ta
     <Button Content="Button 5"/>  
 </WrapPanel>
 ```
-4. StackPanel
+4. **StackPanel** <br>
 Although not a grid, a StackPanel arranges child elements into a single line, either vertically or horizontally. It’s useful for simple layouts.
 ```
 <StackPanel Orientation="Vertical">  
@@ -749,7 +749,7 @@ Although not a grid, a StackPanel arranges child elements into a single line, ei
     <TextBox/>  
 </StackPanel>
 ```
-5. DockPanel
+5. **DockPanel** <br>
 DockPanel allows you to dock child elements to the left, right, top, bottom, or fill the remaining space. It’s helpful for creating toolbars or menus.
 ```
 <DockPanel>  
@@ -760,7 +760,7 @@ DockPanel allows you to dock child elements to the left, right, top, bottom, or 
     <Button Content="Center"/>  
 </DockPanel>
 ```
-6. Canvas
+6. **Canvas** <br>
 Canvas allows for absolute positioning of children by specifying coordinates. It’s not grid-based but useful for custom layouts where precise placement is needed.
 ```
 <Canvas>  
@@ -768,7 +768,7 @@ Canvas allows for absolute positioning of children by specifying coordinates. It
 </Canvas>
 ```
 
-7. VirtualizingStackPanel
+7. **VirtualizingStackPanel** <br>
 Similar to StackPanel, but optimized for performance with large collections of items, the VirtualizingStackPanel only creates UI elements for visible items, saving memory.
 ```
 <ListBox ItemsSource="{Binding SomeCollection}">  
@@ -779,7 +779,7 @@ Similar to StackPanel, but optimized for performance with large collections of i
     </ListBox.ItemsPanel>  
 </ListBox>
 ```
-8. GridSplitter
+8. **GridSplitter** <br>
 Although it’s not a layout panel on its own, the GridSplitter can be used within a Grid to allow users to resize rows or columns interactively.
 ```
 <Grid>  
