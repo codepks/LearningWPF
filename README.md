@@ -696,3 +696,102 @@ public class MainViewModel
     }  
 }
 ```
+
+# Types of Grid
+1. **Grid**
+The Grid is the most versatile layout panel in WPF. It allows you to define rows and columns with precise control over their sizes and proportions.
+```
+<Grid>  
+    <Grid.RowDefinitions>  
+        <RowDefinition Height="Auto"/>  
+        <RowDefinition Height="*"/>  
+        <RowDefinition Height="50"/>  
+    </Grid.RowDefinitions>  
+    <Grid.ColumnDefinitions>  
+        <ColumnDefinition Width="200"/>  
+        <ColumnDefinition Width="*"/>  
+    </Grid.ColumnDefinitions>  
+    
+    <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:"/>  
+    <TextBox Grid.Row="0" Grid.Column="1" />  
+    <Button Grid.Row="1" Grid.ColumnSpan="2" Content="Submit"/>  
+</Grid>
+```
+
+2. **UniformGrid**
+UniformGrid arranges elements in a grid where all cells are of equal size. It takes care of distributing available space evenly across all children, making it ideal for scenarios where uniform cell sizes are preferred.
+```
+<UniformGrid Rows="2" Columns="2">  
+    <Button Content="Button 1"/>  
+    <Button Content="Button 2"/>  
+    <Button Content="Button 3"/>  
+    <Button Content="Button 4"/>  
+</UniformGrid>
+```
+
+3. **WrapPanel** positions child elements in sequential order from left to right and wraps them to the next line when there's not enough space. It is handy if the number of items in your UI may change.
+```
+<WrapPanel>  
+    <Button Content="Button 1"/>  
+    <Button Content="Button 2"/>  
+    <Button Content="Button 3"/>  
+    <Button Content="Button 4"/>  
+    <Button Content="Button 5"/>  
+</WrapPanel>
+```
+4. StackPanel
+Although not a grid, a StackPanel arranges child elements into a single line, either vertically or horizontally. It’s useful for simple layouts.
+```
+<StackPanel Orientation="Vertical">  
+    <TextBlock Text="Name:"/>  
+    <TextBox/>  
+    <TextBlock Text="Email:"/>  
+    <TextBox/>  
+</StackPanel>
+```
+5. DockPanel
+DockPanel allows you to dock child elements to the left, right, top, bottom, or fill the remaining space. It’s helpful for creating toolbars or menus.
+```
+<DockPanel>  
+    <Button Content="Top" DockPanel.Dock="Top"/>  
+    <Button Content="Bottom" DockPanel.Dock="Bottom"/>  
+    <Button Content="Left" DockPanel.Dock="Left"/>  
+    <Button Content="Right" DockPanel.Dock="Right"/>  
+    <Button Content="Center"/>  
+</DockPanel>
+```
+6. Canvas
+Canvas allows for absolute positioning of children by specifying coordinates. It’s not grid-based but useful for custom layouts where precise placement is needed.
+```
+<Canvas>  
+    <Button Canvas.Left="50" Canvas.Top="100" Content="Button"/>  
+</Canvas>
+```
+
+7. VirtualizingStackPanel
+Similar to StackPanel, but optimized for performance with large collections of items, the VirtualizingStackPanel only creates UI elements for visible items, saving memory.
+```
+<ListBox ItemsSource="{Binding SomeCollection}">  
+    <ListBox.ItemsPanel>  
+        <ItemsPanelTemplate>  
+            <VirtualizingStackPanel/>  
+        </ItemsPanelTemplate>  
+    </ListBox.ItemsPanel>  
+</ListBox>
+
+8. GridSplitter
+Although it’s not a layout panel on its own, the GridSplitter can be used within a Grid to allow users to resize rows or columns interactively.
+```
+<Grid>  
+    <Grid.RowDefinitions>  
+        <RowDefinition Height="*"/>  
+        <RowDefinition Height="5"/>  
+        <RowDefinition Height="*"/>  
+    </Grid.RowDefinitions>  
+    
+    <TextBlock Grid.Row="0" Text="Top Area"/>  
+    <GridSplitter Grid.Row="1" />  
+    <TextBlock Grid.Row="2" Text="Bottom Area"/>  
+</Grid>
+```
+```
