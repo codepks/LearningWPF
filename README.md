@@ -795,3 +795,74 @@ Although it’s not a layout panel on its own, the GridSplitter can be used with
 </Grid>
 ```
 
+# Displaying List
+Step 1: Define the Model
+First, define a simple model class that will represent each row of data. For this example, we will create a model for a Person.
+```
+public class Person  
+{  
+    public string Name { get; set; }  
+    public int Age { get; set; }  
+}
+```
+Step 2: Create the ViewModel
+Next, create a view model that will hold a collection of Person objects.
+```
+using System.Collections.ObjectModel;  
+
+public class MainViewModel  
+{  
+    public ObservableCollection<Person> People { get; set; }  
+
+    public MainViewModel()  
+    {  
+        People = new ObservableCollection<Person>  
+        {  
+            new Person { Name = "Alice", Age = 30 },  
+            new Person { Name = "Bob", Age = 25 },  
+            new Person { Name = "Charlie", Age = 35 }  
+        };  
+    }  
+}
+```
+Step 3: Define the XAML for the View
+Now, create the XAML for the MainWindow. Here, we will use a ListView to display the collection of Person objects.
+```
+<Window x:Class="WpfApp.MainWindow"  
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+        Title="People List" Height="300" Width="400">  
+    <Grid>  
+        <ListView ItemsSource="{Binding People}">  
+            <ListView.View>  
+                <GridView>  
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="200"/>  
+                    <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}" Width="100"/>  
+                </GridView>  
+            </ListView.View>  
+        </ListView>  
+    </Grid>  
+</Window>
+```
+Step 4: Set DataContext in Code-Behind
+Finally, set the DataContext of the MainWindow to an instance of the MainViewModel in the code-behind file (MainWindow.xaml.cs).
+```
+using System.Windows;  
+
+namespace WpfApp  
+{  
+    public partial class MainWindow : Window  
+    {  
+        public MainWindow()  
+        {  
+            InitializeComponent();  
+            DataContext = new MainViewModel(); // Set the DataContext to the ViewModel  
+        }  
+    }  
+}
+```
+Summary
+Model: The Person class represents a single row of data.
+ViewModel: MainViewModel holds a collection of Person instances.
+View: The XAML defines a ListView that binds to the People collection using a GridView to display the properties.
+DataContext: The DataContext is set in the code-behind to enable data binding.
