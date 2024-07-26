@@ -778,7 +778,7 @@ Similar to StackPanel, but optimized for performance with large collections of i
         </ItemsPanelTemplate>  
     </ListBox.ItemsPanel>  
 </ListBox>
-
+```
 8. GridSplitter
 Although it’s not a layout panel on its own, the GridSplitter can be used within a Grid to allow users to resize rows or columns interactively.
 ```
@@ -794,4 +794,4 @@ Although it’s not a layout panel on its own, the GridSplitter can be used with
     <TextBlock Grid.Row="2" Text="Bottom Area"/>  
 </Grid>
 ```
-```
+
