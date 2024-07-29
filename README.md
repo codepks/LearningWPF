@@ -866,3 +866,59 @@ Model: The Person class represents a single row of data.
 ViewModel: MainViewModel holds a collection of Person instances.
 View: The XAML defines a ListView that binds to the People collection using a GridView to display the properties.
 DataContext: The DataContext is set in the code-behind to enable data binding.
+
+# Syncfusion List
+xaml code
+```
+<Window x:Class="YourNamespace.MainWindow"  
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"  
+        Title="SfDataGrid Example" Height="350" Width="525">  
+    <Grid>  
+        <syncfusion:SfDataGrid AutoGenerateColumns="False" ItemsSource="{Binding YourData}">  
+            <syncfusion:SfDataGrid.Columns>  
+                <syncfusion:GridTextColumn Header="TextBlock" MappingName="TextBlock" />  
+                <syncfusion:GridTemplateColumn Header="TextBox">  
+                    <syncfusion:GridTemplateColumn.CellTemplate>  
+                        <DataTemplate>  
+                            <TextBox Text="{Binding TextBox, UpdateSourceTrigger=PropertyChanged}" Width="100"/>  
+                        </DataTemplate>  
+                    </syncfusion:GridTemplateColumn.CellTemplate>  
+                </syncfusion:GridTemplateColumn>  
+            </syncfusion:SfDataGrid.Columns>  
+        </syncfusion:SfDataGrid>  
+    </Grid>  
+</Window>
+```
+
+Code behind
+```
+using System.Collections.ObjectModel;  
+using System.Windows;  
+
+namespace YourNamespace  
+{  
+    public partial class MainWindow : Window  
+    {  
+        public ObservableCollection<Item> YourData { get; set; }  
+
+        public MainWindow()  
+        {  
+            InitializeComponent();  
+            YourData = new ObservableCollection<Item>();  
+            for (int i = 1; i <= 13; i++)  
+            {  
+                YourData.Add(new Item { TextBlock = $"Item {i}", TextBox = $"Text {i}" });  
+            }  
+            DataContext = this;  
+        }  
+    }  
+
+    public class Item  
+    {  
+        public string TextBlock { get; set; }  
+        public string TextBox { get; set; }  
+    }  
+}
+```
