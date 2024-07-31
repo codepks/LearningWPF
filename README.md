@@ -816,6 +816,8 @@ xaml code
     </Grid>  
 </Window>
 ```
+`<syncfusion:GridTemplateColumn.CellTemplate>` is set for the particular column when you want to have a disctinctive property of the colum apart from the text.
+
 
 Code behind
 ```
