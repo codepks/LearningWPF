@@ -619,83 +619,6 @@ public class RelayCommand : ICommand
 }
 ```
 
-# Working with Syncfusion Chart
-
-XAML file
-```
-<Window x:Class="WpfApp.MainWindow"  
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"  
-        Title="Syncfusion Chart Example" Height="450" Width="800">  
-    
-    <Grid>  
-        <syncfusion:SfChart Title="Sample Chart">  
-            <syncfusion:SfChart.PrimaryAxis>  
-                <syncfusion:NumericalAxis Title="X Axis" />  
-            </syncfusion:SfChart.PrimaryAxis>  
-
-            <syncfusion:SfChart.SecondaryAxis>  
-                <syncfusion:NumericalAxis Title="Y Axis" />  
-            </syncfusion:SfChart.SecondaryAxis>  
-
-            <syncfusion:LineSeries ItemsSource="{Binding Data}"   
-                                   XBindingPath="XValue"   
-                                   YBindingPath="YValue"   
-                                   StrokeThickness="2"   
-                                   Title="Line Series" />  
-        </syncfusion:SfChart>  
-    </Grid>  
-</Window>
-```
-
-ViewModel File<br>
-```
-using System.Windows;  
-
-namespace WpfApp  
-{  
-    public partial class MainWindow : Window  
-    {  
-        public MainWindow()  
-        {  
-            InitializeComponent();  
-            DataContext = new MainViewModel();  
-        }  
-    }  
-}
-```
-DataModel
-```
-public class ChartData  
-{  
-    public double XValue { get; set; }  
-    public double YValue { get; set; }  
-}
-```
-Injecting Data
-```
-using System.Collections.ObjectModel;  
-
-public class MainViewModel  
-{  
-    public ObservableCollection<ChartData> Data { get; set; }  
-
-    public MainViewModel()  
-    {  
-        Data = new ObservableCollection<ChartData>  
-        {  
-            new ChartData { XValue = 1, YValue = 23 },  
-            new ChartData { XValue = 2, YValue = 45 },  
-            new ChartData { XValue = 3, YValue = 56 },  
-            new ChartData { XValue = 4, YValue = 34 },  
-            new ChartData { XValue = 5, YValue = 78 },  
-            new ChartData { XValue = 6, YValue = 12 },  
-            new ChartData { XValue = 7, YValue = 90 }  
-        };  
-    }  
-}
-```
 
 # Types of Grid
 1. **Grid**
@@ -919,6 +842,83 @@ namespace YourNamespace
     {  
         public string TextBlock { get; set; }  
         public string TextBox { get; set; }  
+    }  
+}
+```
+# Working with Syncfusion Chart
+
+XAML file
+```
+<Window x:Class="WpfApp.MainWindow"  
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"  
+        Title="Syncfusion Chart Example" Height="450" Width="800">  
+    
+    <Grid>  
+        <syncfusion:SfChart Title="Sample Chart">  
+            <syncfusion:SfChart.PrimaryAxis>  
+                <syncfusion:NumericalAxis Title="X Axis" />  
+            </syncfusion:SfChart.PrimaryAxis>  
+
+            <syncfusion:SfChart.SecondaryAxis>  
+                <syncfusion:NumericalAxis Title="Y Axis" />  
+            </syncfusion:SfChart.SecondaryAxis>  
+
+            <syncfusion:LineSeries ItemsSource="{Binding Data}"   
+                                   XBindingPath="XValue"   
+                                   YBindingPath="YValue"   
+                                   StrokeThickness="2"   
+                                   Title="Line Series" />  
+        </syncfusion:SfChart>  
+    </Grid>  
+</Window>
+```
+
+ViewModel File<br>
+```
+using System.Windows;  
+
+namespace WpfApp  
+{  
+    public partial class MainWindow : Window  
+    {  
+        public MainWindow()  
+        {  
+            InitializeComponent();  
+            DataContext = new MainViewModel();  
+        }  
+    }  
+}
+```
+DataModel
+```
+public class ChartData  
+{  
+    public double XValue { get; set; }  
+    public double YValue { get; set; }  
+}
+```
+Injecting Data
+```
+using System.Collections.ObjectModel;  
+
+public class MainViewModel  
+{  
+    public ObservableCollection<ChartData> Data { get; set; }  
+
+    public MainViewModel()  
+    {  
+        Data = new ObservableCollection<ChartData>  
+        {  
+            new ChartData { XValue = 1, YValue = 23 },  
+            new ChartData { XValue = 2, YValue = 45 },  
+            new ChartData { XValue = 3, YValue = 56 },  
+            new ChartData { XValue = 4, YValue = 34 },  
+            new ChartData { XValue = 5, YValue = 78 },  
+            new ChartData { XValue = 6, YValue = 12 },  
+            new ChartData { XValue = 7, YValue = 90 }  
+        };  
     }  
 }
 ```
