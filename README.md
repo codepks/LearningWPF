@@ -847,7 +847,7 @@ namespace YourNamespace
     }  
 }
 ```
-# Working with Syncfusion Chart
+## Working with Syncfusion Chart
 
 XAML file
 ```
@@ -925,3 +925,63 @@ public class MainViewModel
 }
 ```
 ## SfDataGrid.Columns
+To display employee list on the data grid by pushing the list directly to the grid:
+```
+using System.Collections.ObjectModel;  
+using System.ComponentModel;  
+
+namespace YourNamespace  
+{  
+    public class Employee  
+    {  
+        public int Id { get; set; }  
+        public string Name { get; set; }  
+        public int Age { get; set; }  
+        public string Department { get; set; }  
+    }  
+
+    public class MainViewModel : INotifyPropertyChanged  
+    {  
+        public ObservableCollection<Employee> EmployeeList { get; set; }  
+
+        public MainViewModel()  
+        {  
+            EmployeeList = new ObservableCollection<Employee>  
+            {  
+                new Employee { Id = 1, Name = "John Doe", Age = 30, Department = "HR" },  
+                new Employee { Id = 2, Name = "Jane Smith", Age = 25, Department = "IT" },  
+                new Employee { Id = 3, Name = "Emily Johnson", Age = 35, Department = "Finance" },  
+                new Employee { Id = 4, Name = "Michael Brown", Age = 40, Department = "Marketing" }  
+            };  
+        }  
+
+        public event PropertyChangedEventHandler PropertyChanged;  
+
+        protected void OnPropertyChanged(string propertyName)  
+        {  
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));  
+        }  
+    }  
+}
+```
+
+xaml code 
+```
+<Window x:Class="YourNamespace.MainWindow"  
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"  
+        Title="SfDataGrid Example" Height="450" Width="800">  
+    <Grid>  
+        <syncfusion:SfDataGrid x:Name="dataGrid"  
+                                ItemsSource="{Binding EmployeeList}">  
+            <syncfusion:SfDataGrid.Columns>  
+                <syncfusion:GridTextColumn MappingName="Id" HeaderText="Employee ID" Width="100"/>  
+                <syncfusion:GridTextColumn MappingName="Name" HeaderText="Employee Name" Width="200"/>  
+                <syncfusion:GridNumericColumn MappingName="Age" HeaderText="Age" Width="100"/>  
+                <syncfusion:GridTextColumn MappingName="Department" HeaderText="Department" Width="150"/>  
+            </syncfusion:SfDataGrid.Columns>  
+        </syncfusion:SfDataGrid>  
+    </Grid>  
+</Window>
+```
