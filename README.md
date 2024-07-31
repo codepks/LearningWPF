@@ -790,7 +790,9 @@ ViewModel: MainViewModel holds a collection of Person instances.
 View: The XAML defines a ListView that binds to the People collection using a GridView to display the properties.
 DataContext: The DataContext is set in the code-behind to enable data binding.
 
-# Syncfusion List
+# Syncfusion
+
+## Syncfusion List
 xaml code
 ```
 <Window x:Class="YourNamespace.MainWindow"  
@@ -922,3 +924,4 @@ public class MainViewModel
     }  
 }
 ```
+## SfDataGrid.Columns
