@@ -987,3 +987,78 @@ xaml code
     </Grid>  
 </Window>
 ```
+# Keywords
+## `UpdateTriggerSouce=PropertyChanged`
+this continously calls the property update on each new number press
+
+## IValueConverter
+1. IValueConverter is an interface that allows you to define a way to convert data from one type to another for use in user interfaces.
+2. You will need to implement the IValueConverter interface, which requires you to define two methods: Convert and ConvertBack
+
+```
+using System;  
+using System.Globalization;  
+using System.Windows;  
+using System.Windows.Data;  
+
+public class BooleanToVisibilityConverter : IValueConverter  
+{  
+    // Converts a Boolean value to Visibility  
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)  
+    {  
+        if (value is bool boolValue)  
+        {  
+            return boolValue ? Visibility.Visible : Visibility.Collapsed;  
+        }  
+        return Visibility.Collapsed; // Default for non-Boolean input  
+    }  
+
+    // Converts a Visibility value back to Boolean  
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)  
+    {  
+        if (value is Visibility visibilityValue)  
+        {  
+            return visibilityValue == Visibility.Visible;  
+        }  
+        return false; // Default for non-Visibility input  
+    }  
+}
+```
+```
+<Window x:Class="YourNamespace.MainWindow"  
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+        xmlns:local="clr-namespace:YourNamespace"  
+        Title="MainWindow" Height="350" Width="525">  
+    <Window.Resources>  
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />  
+    </Window.Resources>  
+    
+    <Grid>  
+        <CheckBox x:Name="MyCheckBox" Content="Show Element" />  
+        
+        <TextBlock Text="Hello, World!"  
+                   Visibility="{Binding IsChecked, ElementName=MyCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"   
+                   Margin="10" />  
+    </Grid>  
+</Window>
+```
+# Finding
+1. In UI, on loading it first falls in the constructor and then the property call triggers i.e the constructor values are updated first and then the property values as given below(in the set function)
+```
+private bool _proceedWithDiscard = false;
+public bool ProceedWithDiscard
+{
+    get { return _proceedWithDiscard; }
+    set
+    {
+	if (_proceedWithDiscard != value)
+	{
+	    _proceedWithDiscard = value;
+	    RaisePropertyChanged(nameof(ProceedWithDiscard));
+	}
+    }
+}
+```
+
+2. updating private values like `_proceedWithDiscard`  doesn't update update actual property
