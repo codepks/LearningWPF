@@ -929,6 +929,10 @@ public class MainViewModel
 ## SfDataGrid.Columns
 To display employee list on the data grid by pushing the list directly to the grid:
 ```
+HeaderText="Incidence" MappingName="IncidenceType"
+```
+This is only meant for naming the columns correctly else it doesn't limit the number of columns even if you delete this line
+```
 using System.Collections.ObjectModel;  
 using System.ComponentModel;  
 
