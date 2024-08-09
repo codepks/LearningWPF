@@ -992,6 +992,14 @@ xaml code
 </Window>
 ```
 # Keywords
+## Difference between * and auto
+`*` <br>
+Meaning: The star size is a proportional sizing method used in layouts, usually found in Grid containers. When you set a dimension (height or width) to *, it indicates that the space should be allocated based on a proportion of the available space in the parent container. <br>
+
+`auto` <br>
+Meaning: When you set a dimension to Auto, it tells the layout to size the element based on its content. This means the width or height of the element will be just enough to fit its content without any extra space.
+
+
 ## `UpdateTriggerSouce=PropertyChanged`
 this continously calls the property update on each new number press
 
