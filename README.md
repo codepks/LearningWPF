@@ -858,7 +858,7 @@ public class MakeReservationCommand : AsyncCommandBase	{
 }
 
 private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)	{
-    if(e.PropertyName == nameof(MakeReservationViewModel.CanCreateReservation))
+    if(e.PropertyName == nameof(MakeReservationViewModel.Username))
     {
 	OnCanExecutedChanged();
     }
@@ -866,7 +866,7 @@ private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs 
 ```
 1. In the code above, `PropertyChanged` is an event in `MakeReservationCommand` class which gets invoked every time `RaisePropertyChanged` is called
 2. `PropertyChanged` on invking passes class name where it is invoked from and the property name it gets invoked from as given : `PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));`
-3. So `OnViewModelPropertyChanged` checks if the property name being invoked from is `CanCreateReservation`
+3. So `OnViewModelPropertyChanged` checks if the property name being invoked from `Username` property
 
 ```
  public string Username {
@@ -875,12 +875,10 @@ private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs 
      set  {
          _username = value;
          OnPropertyChanged(nameof(Username));
-         ClearErrors(nameof(Username));
 
          if(!HasUsername)  {
              AddError("Username cannot be empty.", nameof(Username));
          }
-         OnPropertyChanged(nameof(CanCreateReservation));
      }
  }
 ```
