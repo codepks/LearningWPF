@@ -496,12 +496,22 @@ class MyClass
 {
     public delegate void MyDelegate(object sender, EventArgs e);
 
-    public void MyMethod(object sender, EventArgs e)
+    public void MyMethod1(object sender, EventArgs e)
     {
-        Console.WriteLine("Hello World!");
+        Console.WriteLine("Hello World 1!");
     }
 
-    public event MyDelegate MyEvent;
+   public void MyMethod2(object sender, EventArgs e)
+   {
+      Console.WriteLine("Hello World 2!");
+   }
+
+   public void MyMethod3(object sender, EventArgs e)
+   {
+      Console.WriteLine("Hello World 3!");
+   }
+   
+   public event MyDelegate MyEvent;
 
     public void RaiseEvent()
     {
@@ -511,13 +521,15 @@ class MyClass
     public static void Main()
     {
         MyClass myClass = new MyClass();
-        myClass.MyEvent += myClass.MyMethod;
+        myClass.MyEvent += myClass.MyMethod1;
+        myClass.MyEvent += myClass.MyMethod2;
+        myClass.MyEvent += myClass.MyMethod3;
         myClass.RaiseEvent();
     }
 }
 ```
 1. `MyDelegate` is a delegate to define the function which can subscribe to the event `MyEvent`
-2. `MyMethod` being the same signature as `MyDelegate` can subscribe to `MyEvent`
+2. `MyMethod1`, `MyMethod2` and `MyMethod3` being the same signature as `MyDelegate` can subscribe to `MyEvent`
 3. When `RaiseEvent` is invoked, internally `MyEvent` is invoked and the `Invoke` sends the parameters, first being the publisher class and 2nd being the arguments
 
 
@@ -527,13 +539,13 @@ class MyClass
 ```
 public class CommonBase : INotifyPropertyChanged
    {
-      public event PropertyChangedEventHandler PropertyChanged;
+      public event PropertyChangedEventHandler PropertyChanged; //delegate PropertyChangedEventHandler used to declare an event
 
       protected void RaisePropertyChanged(String propertyName)
       {
          PropertyChangedEventHandler handler = PropertyChanged;
          if(handler != null)
-            handler(this, new PropertyChangedEventArgs(propertyName));
+            handler(this, new PropertyChangedEventArgs(propertyName));	//invoking the event by sending the arguments are publisher class name and 
       }
    }
 ```
