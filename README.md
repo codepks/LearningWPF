@@ -549,11 +549,18 @@ public class CommonBase : INotifyPropertyChanged
       }
    }
 ```
+`PropertyChangedEventArgs` is used to specify which property has changed
 
 ```
 public class CommonBase : INotifyPropertyChanged
 ```
-INotifyPropertyChanged interface. This interface is a standard in .NET that provides a way to notify clients (like UI elements) that a property value has changed.
+1. `INotifyPropertyChanged` interface. This interface is a standard in .NET that provides a way to notify clients (like UI elements) that a property value has changed.
+2. When you change the property value in your data model, it triggers the OnPropertyChanged method, which raises the PropertyChanged event.
+3. Binding to properties that doesn't implement INotifyPropertyChanged can result in memory leaks
+4. If you want to send a collection of properties in form of list to the view we use `ObservableCollection`
+5. `ObservableCollection` implements `INotifyPropertyChanged`, so whenever we add or remove the entries in the list the listview in the xaml gets notified
+
+
 
 ```
 public event PropertyChangedEventHandler PropertyChanged;
@@ -820,7 +827,8 @@ Now, create the XAML for the MainWindow. Here, we will use a ListView to display
 </Window>
 ```
 Step 4: Set DataContext in Code-Behind
-Finally, set the DataContext of the MainWindow to an instance of the MainViewModel in the code-behind file (MainWindow.xaml.cs).
+1. Finally, set the DataContext of the MainWindow to an instance of the MainViewModel in the code-behind file (MainWindow.xaml.cs).
+2. MainViewModel is the one responsible for displaying which view will be displayed in front
 ```
 using System.Windows;  
 
@@ -841,6 +849,41 @@ Model: The Person class represents a single row of data.
 ViewModel: MainViewModel holds a collection of Person instances.
 View: The XAML defines a ListView that binds to the People collection using a GridView to display the properties.
 DataContext: The DataContext is set in the code-behind to enable data binding.
+
+## External Subscription
+REs
+```
+public class MakeReservationCommand : AsyncCommandBase	{
+	_makeReservationViewModel.PropertyChanged += OnViewModelPropertyChanged;
+}
+
+private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)	{
+    if(e.PropertyName == nameof(MakeReservationViewModel.CanCreateReservation))
+    {
+	OnCanExecutedChanged();
+    }
+}
+```
+1. In the code above, `PropertyChanged` is an event in `MakeReservationCommand` class which gets invoked every time `RaisePropertyChanged` is called
+2. `PropertyChanged` on invking passes class name where it is invoked from and the property name it gets invoked from as given : `PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));`
+3. So `OnViewModelPropertyChanged` checks if the property name being invoked from is `CanCreateReservation`
+
+```
+ public string Username {
+     get  { return _username; }
+
+     set  {
+         _username = value;
+         OnPropertyChanged(nameof(Username));
+         ClearErrors(nameof(Username));
+
+         if(!HasUsername)  {
+             AddError("Username cannot be empty.", nameof(Username));
+         }
+         OnPropertyChanged(nameof(CanCreateReservation));
+     }
+ }
+```
 
 # Syncfusion
 
