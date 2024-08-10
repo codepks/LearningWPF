@@ -485,6 +485,45 @@ Lots of services are used
 3. viewModel file is the one which which interacts wwith the model class and generally implements INotifyPropertyChanged and send events to UI on updates
 
 ## INotifyPropertyChanged
+
+### Take 1 - Understanding
+1. Every view-model class that inherits `INotifyPropertyChanged` is regarded as a publisher and `xaml` code element subscribe to it using `binding`
+2. On inheritance we have to implement the using using this line `public event PropertyChangedEventHandler PropertyChanged;`
+3. Here `PropertyChangedEventHandler` is a delegate which is required for defining the function signature of the object subscribing to it woth specific parameter list and return type
+
+```
+class MyClass
+{
+    public delegate void MyDelegate(object sender, EventArgs e);
+
+    public void MyMethod(object sender, EventArgs e)
+    {
+        Console.WriteLine("Hello World!");
+    }
+
+    public event MyDelegate MyEvent;
+
+    public void RaiseEvent()
+    {
+        MyEvent?.Invoke(this, EventArgs.Empty);
+    }
+
+    public static void Main()
+    {
+        MyClass myClass = new MyClass();
+        myClass.MyEvent += myClass.MyMethod;
+        myClass.RaiseEvent();
+    }
+}
+```
+1. `MyDelegate` is a delegate to define the function which can subscribe to the event `MyEvent`
+2. `MyMethod` being the same signature as `MyDelegate` can subscribe to `MyEvent`
+3. When `RaiseEvent` is invoked, internally `MyEvent` is invoked and the `Invoke` sends the parameters, first being the publisher class and 2nd being the arguments
+
+
+
+
+### Take 2
 ```
 public class CommonBase : INotifyPropertyChanged
    {
@@ -543,6 +582,7 @@ public class MyViewModel : CommonBase
    }
 }
 ```
+
 
 # Loaded vs OnInitialized 
 1. Loaded - The Loaded event is triggered after the element is loaded, which means it is fully initialized and ready to be interacted with
