@@ -1167,3 +1167,16 @@ public bool ProceedWithDiscard
 ```
 
 2. updating private values like `_proceedWithDiscard`  doesn't update update actual property
+
+# Depedency Injection
+(source of video)[https://www.youtube.com/watch?v=T1bK0j2dvc0]
+
+1. It is helpful in handling the tight coupling between objects
+
+2. Three ways to do so
+ - **Constructor Based Dependency** : Create the dependent object while creating the object `Person person = new Person(home)`
+ - **Property Base Dependecny** : Create the object via initializing public property `Person person = new College();`
+ - **Method Injection** : Use the dependent object oonly via object when needed `person.GetTreatment(new Hospital)`
+
+3. **Using interfaces** : Reduces coupling and we can achieve single point of changes
+4. **Using Containers** : We can map the object to the interface and predecide which object to be called on the usage of the interface using autofac. You don't get to see `new` keyword
