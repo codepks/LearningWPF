@@ -1085,6 +1085,12 @@ xaml code
 </Window>
 ```
 # Keywords
+
+## DataContext
+1. Different control view can be different contexts for a view
+2. Advantage of using DataContext : You set the context of binding and thus you don't need to set the full path of the object `<TextBlock Text="{Binding Name}" />`
+3. 
+
 ## Difference between * and auto
 `*` <br>
 Meaning: The star size is a proportional sizing method used in layouts, usually found in Grid containers. When you set a dimension (height or width) to *, it indicates that the space should be allocated based on a proportion of the available space in the parent container. <br>
@@ -1180,3 +1186,4 @@ public bool ProceedWithDiscard
 
 3. **Using interfaces** : Reduces coupling and we can achieve single point of changes
 4. **Using Containers** : We can map the object to the interface and predecide which object to be called on the usage of the interface using autofac. You don't get to see `new` keyword
+
