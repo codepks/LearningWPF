@@ -1174,16 +1174,40 @@ public bool ProceedWithDiscard
 
 2. updating private values like `_proceedWithDiscard`  doesn't update update actual property
 
-# Depedency Injection
-(source of video)[https://www.youtube.com/watch?v=T1bK0j2dvc0]
+# Data Templates
+Task to represent a structure element into separate UI element. <br>
+Class
+```
+public class Person  
+{  
+    public string Name { get; set; }  
+    public int Age { get; set; }  
+}
+```
 
-1. It is helpful in handling the tight coupling between objects
+xaml file
+```
+<Window x:Class="YourNamespace.MainWindow"  
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+        Title="MainWindow" Height="300" Width="300">  
+    <Window.Resources>  
+        <DataTemplate x:Key="PersonTemplate">  
+            <StackPanel Orientation="Horizontal">  
+                <TextBlock Text="{Binding Name}" Margin="5" />  
+                <TextBlock Text="{Binding Age}" Margin="5" />  
+            </StackPanel>  
+        </DataTemplate>  
+    </Window.Resources>  
 
-2. Three ways to do so
- - **Constructor Based Dependency** : Create the dependent object while creating the object `Person person = new Person(home)`
- - **Property Base Dependecny** : Create the object via initializing public property `Person person = new College();`
- - **Method Injection** : Use the dependent object oonly via object when needed `person.GetTreatment(new Hospital)`
+    <Grid>  
+        <ListBox ItemsSource="{Binding People}" ItemTemplate="{StaticResource PersonTemplate}" />  
+    </Grid>  
+</Window>
+```
 
-3. **Using interfaces** : Reduces coupling and we can achieve single point of changes
-4. **Using Containers** : We can map the object to the interface and predecide which object to be called on the usage of the interface using autofac. You don't get to see `new` keyword
+Inn the above example:
 
+1. The DataTemplate PersonTemplate defines how each Person instance will be represented in the ListBox.
+2. The ListBox is bound to a collection of Person objects (not shown in this example) through its ItemsSource property.
+3. Each Person object will be displayed as a StackPanel with the Name and Age properties shown in TextBlock controls.
