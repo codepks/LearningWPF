@@ -107,6 +107,29 @@ The Content property only allows for a single child element, so we use a WrapPan
     <ComboBoxItem>Not Rubber</ComboBoxItem>
 </ComboBox>
 ```
+OR
+```
+<ComboBox   
+    ItemsSource="{Binding CalModes}"   
+    SelectedItem="{Binding SelectedCalMode}"   
+    SelectedIndex="0"  
+    DisplayMemberPath="Name"   
+    HorizontalAlignment="Left"   
+    VerticalAlignment="Top"   
+    Width="120"/>
+```
+**ItemsSource:**<br>
+ItemsSource="{Binding CalModes}": This is a data binding expression that connects the ComboBox to a Observable collection called CalModes and combo box will be populated with the list accordingly. <br>
+
+**SelectedItem:** <br>
+SelectedItem="{Binding SelectedCalMode}": This binding indicates which item is currently selected in the ComboBox from the Observable collection called CalModes. <br>
+
+**SelectedIndex:** <br>
+SelectedIndex="0": This property sets the initial selection of the ComboBox.  <br>
+
+**DisplayMemberPath:** <br>
+DisplayMemberPath="Name": This property specifies which property of the items in the CalModes collection should be displayed as the text in the ComboBox. In this case, it assumes each item in the CalModes collection has a property called Name.
+So if CalModes consists of objects of a class that has a Name property, the ComboBox will display the values of these Name properties to the user. <b>
 
 14. For adding controller to the element be it button or checkbox you need to have its listener in the source code and a controller which you mention with the name of the checkbox using **x:Name=""**
 
