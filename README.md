@@ -1107,6 +1107,21 @@ xaml code
     </Grid>  
 </Window>
 ```
+
+## Histogram
+```
+<syncfusion:SfChart  Margin="0,10,8,30" Height="164" Width="450">
+                <syncfusion:SfChart.PrimaryAxis>
+                    <syncfusion:NumericalAxis />
+                </syncfusion:SfChart.PrimaryAxis>
+
+                <syncfusion:SfChart.SecondaryAxis>
+                    <syncfusion:NumericalAxis/>
+                </syncfusion:SfChart.SecondaryAxis>
+
+                <syncfusion:HistogramSeries HistogramInterval="0.1"  ItemsSource="{Binding BinnedData}" XBindingPath="BinRange" YBindingPath="Count" Margin="0,0,12,7"/>
+            </syncfusion:SfChart>
+```
 # Keywords
 
 ## DataContext
