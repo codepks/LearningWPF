@@ -1122,12 +1122,18 @@ xaml code
                 <syncfusion:HistogramSeries HistogramInterval="0.1"  ItemsSource="{Binding BinnedData}" XBindingPath="BinRange" YBindingPath="Count" Margin="0,0,12,7"/>
             </syncfusion:SfChart>
 ```
+
+## Detailed View and Header View
+1. To have Uniformity Cal like experience we need to inculcate `Header View` or `Detailed View`
+2. `Header View` is basically making child of a an extended columns
+3. `Detailed View` is basically making template views visible under your header and you can have the customized templates in the detailed view.
+
+
 # Keywords
 
 ## DataContext
 1. Different control view can be different contexts for a view
 2. Advantage of using DataContext : You set the context of binding and thus you don't need to set the full path of the object `<TextBlock Text="{Binding Name}" />`
-3. 
 
 ## Difference between * and auto
 `*` <br>
