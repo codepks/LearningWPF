@@ -1128,6 +1128,9 @@ xaml code
 2. `Header View` is basically making child of a an extended columns
 3. `Detailed View` is basically making template views visible under your header and you can have the customized templates in the detailed view.
 
+### Header View
+Please suffer the example given here:
+[source](https://help.syncfusion.com/wpf/datagrid/master-details-view)
 
 # Keywords
 
