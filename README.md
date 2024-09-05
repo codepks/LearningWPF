@@ -1129,7 +1129,7 @@ xaml code
 3. `Detailed View` is basically making template views visible under your header and you can have the customized templates in the detailed view.
 
 ### Header View
-Please suffer the example given here:
+Please refer the example given here:
 [source](https://help.syncfusion.com/wpf/datagrid/master-details-view)
 
 # Keywords
