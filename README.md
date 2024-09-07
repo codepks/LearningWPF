@@ -1109,6 +1109,7 @@ xaml code
 ```
 
 ## Histogram
+In this case we can either use Histogram Series or Column Series in the SfChart
 ```
 <syncfusion:SfChart  Margin="0,10,8,30" Height="164" Width="450">
                 <syncfusion:SfChart.PrimaryAxis>
