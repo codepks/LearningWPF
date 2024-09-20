@@ -381,6 +381,33 @@ How we invoke the Calculate method from the XAML to the ViewModel class? two way
 
 Here we need to send commands.
 
+### ICommand
+```
+namespace SPX.CalUIUtils
+{
+    public interface ICommand
+    {
+        protected BaseCommand();
+
+        public event EventHandler CanExecuteChanged;
+
+        public abstract bool CanExecute(object parameter);
+        public abstract void Execute(object parameter);        
+    }
+}
+```
+1. `CanExecuteChanged` : This is an event which gets raised whenever the UI elements like button get enabled or disabled
+2. `CanExecute` : It stands as a barrier before the command execution and you can have your input parameter to decide the if the command executes
+3. `Execute` : Executes the command
+
+Event Handler
+```
+public delegate void EventHandler(object sender, EventArgs e);
+```
+
+
+
+
 ### Commands
 Let's make a ButtonCommand here which inherits from inherits from ICommand
 ```
@@ -412,6 +439,8 @@ _How to consume this command class now?_ <br>
 2. Invoke it using the ModelView class `this` pointer to give it the context
 3. Expose the private object via `ICommand` method to the XAML so that XAML get to call it
 4. So far above was the mapping step for Command for XAML 
+
+
 
 
 ### Getting Notifications
