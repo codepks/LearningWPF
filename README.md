@@ -108,16 +108,53 @@ The Content property only allows for a single child element, so we use a WrapPan
 </ComboBox>
 ```
 OR
+ModelView  Class
 ```
-<ComboBox   
-    ItemsSource="{Binding CalModes}"   
-    SelectedItem="{Binding SelectedCalMode}"   
-    SelectedIndex="0"  
-    DisplayMemberPath="Name"   
-    HorizontalAlignment="Left"   
-    VerticalAlignment="Top"   
-    Width="120"/>
+using System.Collections.Generic;  
+using System.Collections.ObjectModel;  
+
+public class Item  
+{  
+    public string Name { get; set; }  
+}
+
+public class MainViewModel  
+{  
+    public ObservableCollection<Item> Items { get; set; }  
+
+    public MainViewModel()  
+    {  
+        // Populate the collection with sample data  
+        Items = new ObservableCollection<Item>  
+        {  
+            new Item { Name = "Item 1" },  
+            new Item { Name = "Item 2" },  
+            new Item { Name = "Item 3" },  
+            new Item { Name = "Item 4" }  
+        };  
+    }  
+}
 ```
+xaml class
+```
+<Window x:Class="WpfComboBoxSample.MainWindow"  
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+        Title="ComboBox Sample" Height="200" Width="300">  
+    <Grid>  
+        <ComboBox x:Name="comboBoxItems"  
+                  ItemsSource="{Binding Items}"  
+                  DisplayMemberPath="Name"  
+                  SelectedValuePath="Name"  
+                  Width="200"  
+                  Height="30"  
+                  VerticalAlignment="Center"  
+                  HorizontalAlignment="Center"/>  
+    </Grid>  
+</Window>
+```
+1. Here DisplayMemberPath takes care of name of the combo box
+
 **ItemsSource:**<br>
 ItemsSource="{Binding CalModes}": This is a data binding expression that connects the ComboBox to a Observable collection called CalModes and combo box will be populated with the list accordingly. <br>
 
