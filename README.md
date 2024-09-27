@@ -171,7 +171,7 @@ So if CalModes consists of objects of a class that has a Name property, the Comb
 
 14. For adding controller to the element be it button or checkbox you need to have its listener in the source code and a controller which you mention with the name of the checkbox using **x:Name=""**
 
-15. On Adding events like **Click** and **Checked** the source code will automatically add the listener function in source code through which the events will be recieved. You can adjust the name to make it customized as per your needs.
+15. On Adding events like `**Click**` and `**Checked**` the source code will automatically add the listener function in source code through which the events will be recieved. You can adjust the name to make it customized as per your needs.
 
 In the code below we are trying to display some text on the Desciption box on click of apply button
 _xaml code_
