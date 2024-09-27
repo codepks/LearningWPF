@@ -153,7 +153,8 @@ xaml class
     </Grid>  
 </Window>
 ```
-1. Here DisplayMemberPath takes care of name of the combo box
+1. Here `DisplayMemberPath` takes care of name of the combo box
+2. The `Item` class can be more complex here but it needs to have minimum ` string member variable to be bound to `DisplayMemberPath`
 
 **ItemsSource:**<br>
 ItemsSource="{Binding CalModes}": This is a data binding expression that connects the ComboBox to a Observable collection called CalModes and combo box will be populated with the list accordingly. <br>
