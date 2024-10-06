@@ -1326,3 +1326,18 @@ Inn the above example:
 1. The DataTemplate PersonTemplate defines how each Person instance will be represented in the ListBox.
 2. The ListBox is bound to a collection of Person objects (not shown in this example) through its ItemsSource property.
 3. Each Person object will be displayed as a StackPanel with the Name and Age properties shown in TextBlock controls.
+
+# Dispatcher
+
+```
+  Application.Current.Dispatcher.Invoke(() =>  
+            {  
+                ProgressBar.Value = i; // Update UI element  
+            });
+```
+1. Dispatcher is a vital component used for managing the execution of code on the UI thread
+2. A Dispatcher is an object that provides a mechanism for executing code on the thread that the Dispatcher is associated with.
+3. Typically, this is the main UI thread of an application. It is designed to facilitate communication between different threads, particularly when you need to update the UI from a background thread.
+4. This is crucial in UI applications where only the UI thread can safely modify UI elements.
+5. The Dispatcher can queue methods to be executed on its thread.
+6.  Dispatcher allows developers to specify a priority for the operations. This can dictate the order in which the actions will be executed.  
