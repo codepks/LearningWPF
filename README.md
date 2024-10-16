@@ -1175,6 +1175,41 @@ xaml code
 </Window>
 ```
 
+## Adding rows in SfGrid
+### Using Row Template
+```
+<syncfusion:SfDataGrid x:Name="dataGrid"  
+                       ItemsSource="{Binding YourObservableCollection}"  
+                       AllowEditing="True">  
+    <syncfusion:SfDataGrid.RowHeaderTemplate>  
+        <DataTemplate>  
+            <TextBlock Text="{Binding RowHeaderName}" />  
+        </DataTemplate>  
+    </syncfusion:SfDataGrid.RowHeaderTemplate>  
+
+    <syncfusion:SfDataGrid.Columns>  
+        <!-- Define your generated columns here -->  
+        <syncfusion:GridNumericColumn MappingName="NumericProperty" HeaderText="Numeric Property" />  
+        <syncfusion:GridTextColumn MappingName="StringProperty" HeaderText="String Property" />  
+    </syncfusion:SfDataGrid.Columns>  
+</syncfusion:SfDataGrid>
+```
+
+### Suing additional name column
+```
+<syncfusion:SfDataGrid x:Name="dataGrid"  
+                       ItemsSource="{Binding YourObservableCollection}"  
+                       AllowEditing="True">  
+    <syncfusion:SfDataGrid.Columns>  
+        <syncfusion:GridTextColumn MappingName="Name" HeaderText="Row Name" />  
+
+        <!-- Define your other generated columns here -->  
+        <syncfusion:GridNumericColumn MappingName="NumericProperty" HeaderText="Numeric Property" />  
+        <syncfusion:GridTextColumn MappingName="StringProperty" HeaderText="String Property" />  
+    </syncfusion:SfDataGrid.Columns>  
+</syncfusion:SfDataGrid>
+```
+
 ## Histogram
 In this case we can either use Histogram Series or Column Series in the SfChart
 ```
