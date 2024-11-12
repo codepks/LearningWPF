@@ -1362,3 +1362,7 @@ Inn the above example:
 2. The ListBox is bound to a collection of Person objects (not shown in this example) through its ItemsSource property.
 3. Each Person object will be displayed as a StackPanel with the Name and Age properties shown in TextBlock controls.
 
+# Syncfusion DockingManager
+[source](https://help.syncfusion.com/wpf/docking/getting-started)
+1. Docking Managers docks from left to right by default : `SideInDockMode` attached property. Since `Left` is the default value
+
