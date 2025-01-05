@@ -1366,3 +1366,28 @@ Inn the above example:
 [source](https://help.syncfusion.com/wpf/docking/getting-started)
 1. Docking Managers docks from left to right by default : `SideInDockMode` attached property. Since `Left` is the default value
 
+# Data-Templates
+1. You can define a DataTemplate in one place and reuse it in multiple UI elements.
+2. DataTemplates are particularly useful for generating content dynamically based on the data context, such as a collection of items.
+3. DataTemplates work well with data binding, allowing you to bind UI elements to properties of data objects.
+
+
+```
+<Window x:Class="ExampleApp.MainWindow"  
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+        Title="DataTemplate Example" Height="350" Width="525">  
+    <Window.Resources>  
+        <DataTemplate x:Key="PersonTemplate">  
+            <StackPanel Orientation="Horizontal">  
+                <TextBlock Text="{Binding Name}" FontWeight="Bold" />  
+                <TextBlock Text="{Binding Age}" Margin="10,0,0,0" />  
+            </StackPanel>  
+        </DataTemplate>  
+    </Window.Resources>  
+
+    <Grid>  
+        <ListBox ItemsSource="{Binding People}" ItemTemplate="{StaticResource PersonTemplate}" />  
+    </Grid>  
+</Window>
+```
